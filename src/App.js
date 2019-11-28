@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import HelloWorld from "./HelloWorld";
-import { createStore } from "redux";
-import reducer from "./reducers/";   //without a file, js will look for an index.js and invoke the export default
+import {store} from "./store/";
+import ButtonGroup from "./ButtonGroup";
 
-const initialState = { tech: "Awesome " };
-const store = createStore(reducer, initialState);   //createStore creates a reducer which is the store "manager";
-// a reducer is required to access the application state
 
 class App extends Component {
   render() {
-    return <HelloWorld tech={store.getState().tech} />;
+    return [
+      <HelloWorld key={1} tech={store.getState().tech} />,
+      <ButtonGroup key={2} technologies={["React", "Elm", "React-redux"]} />
+      //React 16, you don’t have to wrap adjacent JSX elements in a div.
+      // You can use an array if you want — but pass in a key prop to each element in the array.
+    ];
   }
 }
 
